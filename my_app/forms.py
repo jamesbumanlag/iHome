@@ -11,15 +11,15 @@ class SignUpForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'position','password1', 'password2')
+        fields = ('username', 'first_name', 'last_name','password1', 'password2')
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        self.fields['position'].widget.attrs['class'] = 'form-control'
-        self.fields['position'].widget.attrs['placeholder'] = 'Position'
-        self.fields['position'].label = ''
-        self.fields['position'].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
+        # self.fields['position'].widget.attrs['class'] = 'form-control'
+        # self.fields['position'].widget.attrs['placeholder'] = 'Position'
+        # self.fields['position'].label = ''
+        # self.fields['position'].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
 
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
