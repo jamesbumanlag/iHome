@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ res_record.first_name }} {{  res_record.last_name }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <br>
+    <br>
+   
+
+    <div class="card mb-3" style="max-width: 540px;">
+        <h4 class="card-header">{{ res_record.first_name }} {{res_record.last_name }}</h4>
+        {% load static %}
+        <img src="{% static 'res_photo/' %}{{ res_record.first_name}}.jpg" class="img-fluid rounded-start" alt="{{ res_record.first_name }} photo">
+        <br>
+        <div class="card-body">
+          <h4 class="card-title">Personal Information</h4>
+          <p class="card-text">
+            <strong>Section:</strong> &nbsp {{ res_record.section }}<br>
+            <strong>History:</strong> &nbsp {{ res_record.med_background }}<br>
+            <strong>Age:</strong> &nbsp {{ res_record.age }}<br>
+            <strong>Gender:</strong> &nbsp {{ res_record.gender }}<br>
+            <strong>Religion:</strong> &nbsp {{ res_record.religion }} <br>
+          </p>
+          <br>
+          <h4>Address</h4>
+          <p class="card-text">
+            <strong>House No/Street Name:</strong> &nbsp {{ res_record.house_street }}<br>
+            <strong>Suburb/City:</strong> &nbsp {{ res_record.suburb }}<br>
+            <strong>State:</strong> &nbsp {{ res_record.state }}<br>
+            <strong>Postcode:</strong> &nbsp {{ res_record.post_code }}<br>
+            <strong>Country:</strong> &nbsp {{ res_record.country }} <br>
+          </p>
+            <br>
+            <h4>Contact Person</h4>
+          <p class="card-text">
+            <strong>Name:</strong> &nbsp {{ res_record.contact_first }} {{ res_record.contact_last }}<br>
+            <strong>Contact No:</strong> &nbsp {{ res_record.contact_number }}<br>
+            <strong>Relationship:</strong> &nbsp {{ res_record.contact_rel }}<br>
+            </p>
+          <br>
+          <a href="{% url 'residents' %}" class="btn btn-primary">Back </a>
+        </div>
+        </div>
+      </div>
+      <br>
+
+
+        
+</div>
+    
+{% endblock %}

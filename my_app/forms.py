@@ -16,11 +16,6 @@ class SignUpForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
 
-        # self.fields['position'].widget.attrs['class'] = 'form-control'
-        # self.fields['position'].widget.attrs['placeholder'] = 'Position'
-        # self.fields['position'].label = ''
-        # self.fields['position'].help_text = '<span class="form-text text-muted"><small>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
-
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['placeholder'] = 'Password'
         self.fields['password1'].label = ''
@@ -30,6 +25,28 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	 
+
+
+# class AddRecordForm(forms.ModelForm):
+#     first_name =
+#     last_name =
+#     age =
+#     gender =
+#     religion =
+#     house_street =
+#     suburb =
+#     state =
+#     post_code =
+#     country =
+#     section =
+#     med_background =
+#     contact_first =
+#     contact_last =
+#     contact_number =
+#     contact_rel = 
+    
+#     class Meta:
+#         model = Record 
 
 
 
