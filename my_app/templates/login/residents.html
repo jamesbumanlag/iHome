@@ -6,64 +6,52 @@
 
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+<div class="col-md-6 offset-md-3 container ">
     <br>
     <br>
     <h1>Residents</h1>
-    <br><br>
+    
 
+    {% if user.is_authenticated %}
+      {% for record in records %}  
 
-    <div class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card"  style="width: 18rem;">
-            <img src="static/res_photo/John F.jfif" class="card-img-top" alt="...">
+      <br>
+      <div class="card mb-3" style="max-width: 540px;">
+        <h5 class="card-header">{{ record.first_name }} {{record.last_name }}</h5>
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="static/res_photo/{{ record.first_name }}.jpg" class="img-fluid rounded-start" alt="{{ record.first_name }} photo">
+          </div>
+          <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">John Kennedy</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">View</a>
+              
+              <p class="card-text">
+                <strong>Section:</strong> &nbsp {{ record.section }}<br>
+                <strong>History:</strong> &nbsp {{ record.med_background }}<br>
+                <strong>Age:</strong> &nbsp {{ record.age }}
+              </p>
+              
+              <a href="{% url 'records' record.id %}" class="btn btn-primary">View </a>
             </div>
           </div>
         </div>
+      </div>
+      
+         <br>
+      {% endfor %}
+
+    {% else %}
+      <h1>no records</h1>
+    {% endif %}
 
 
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <div class="card"  style="width: 18rem;">
-              <img src="static/res_photo/jaqueline.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Jaqueline Kennedy</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">View</a>
-              </div>
-            </div>
-        </div>
-    </div>
 
     <br>
     <br>
-        <div class="row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card"  style="width: 18rem;">
-                <img src="static/res_photo/ninoy.jfif" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Ninoy Aquino</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">View</a>
-                </div>
-                </div>
-            </div>
     
-            
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="card"  style="width: 18rem;">
-                    <img src="static/res_photo/cory.jfif" class="card-img-top" alt="...">
-                    <div class="card-body">
-                    <h5 class="card-title">Corazon Aquino</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">View</a>
-                    </div>
-                </div>
-            </div>
     
         </div>
 </div>
+
+<br><br>
 {% endblock %}

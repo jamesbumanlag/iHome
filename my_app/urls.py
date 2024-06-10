@@ -13,6 +13,7 @@ urlpatterns = [
     path('register', views.register_user, name='register'),
     path('residents', views.residents, name='residents'),
     path('add_res', views.add_res, name='add_res'),
+    path('record/<int:pk>', views.record, name='records'),
 
 
 ]

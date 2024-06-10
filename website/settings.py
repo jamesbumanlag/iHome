@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-_&n!)u7+diup5i3w4&+-+(o0r*ecztx!j4+%lo4cksvm56$k3g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.17','127.0.0.1','192.168.1.20']
+ALLOWED_HOSTS = ['192.168.1.17','127.0.0.1','192.168.1.20', '192.168.1.8']
 
 
 # Application definition
@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_app',
+    'crispy_forms',
+    'crispy_bootstrap5',
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,8 +82,12 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ihomedb',
+        'USER': 'root',
+        'PASSWORD': '0911',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
