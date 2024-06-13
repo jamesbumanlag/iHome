@@ -83,25 +83,5 @@ def residents(request):
 
 
 
-
-
-    # # Check to see if logging in
-    # if request.method == 'POST':
-    #      username = request.POST['username']
-    #      password = request.POST['password']
-
-    #      # Authenticate
-    #      user = authenticate(request, username=username, password=password)
-    #      if user is not None:
-    #           login(request, user)
-    #           messages.success(request, "You have been logged in")
-    #           return redirect('residents')
-    #      else:
-    #           messages.success(request, 'Error Logging In')
-    #           return redirect('home')
-    # else:
-         
-    #      return render(request, 'login/residents.html',{'records':records})
-
 def add_res(request):
     return render(request, 'login/add_res.html')
