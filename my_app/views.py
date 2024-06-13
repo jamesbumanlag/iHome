@@ -76,7 +76,7 @@ def residents(request):
     if request.user.is_authenticated:
         # Look up records
         records = Record.objects.all()
-        return render(request, 'residents.html',{'records':records})
+        return render(request, 'login/residents.html',{'records':records})
     else:
          messages.success(request, 'You must be logged in')
          return redirect('home')
