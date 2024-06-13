@@ -9,35 +9,60 @@
 <div class="col-md-6 offset-md-3 container ">
     <br>
     <br>
-    <h1>Residents</h1>
-    
+    <h1 class="container">Residents</h1>
+    <br>
 
     {% if user.is_authenticated %}
       {% for record in records %}  
 
-      <br>
-      <div class="card mb-3" style="max-width: 540px;">
-        <h5 class="card-header">{{ record.first_name }} {{record.last_name }}</h5>
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="static/res_photo/{{ record.first_name }}.jpg" class="img-fluid rounded-start" alt="{{ record.first_name }} photo">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              
-              <p class="card-text">
-                <strong>Section:</strong> &nbsp {{ record.section }}<br>
-                <strong>History:</strong> &nbsp {{ record.med_background }}<br>
-                <strong>Age:</strong> &nbsp {{ record.age }}
-              </p>
-              
-              <a href="{% url 'records' record.id %}" class="btn btn-primary">View </a>
+
+      <div class="container">
+        <div class="row">
+
+
+          {% for record in records %}
+            <div class="col-md-6">
+
+              <div class="card mb-4" style="width: 18rem;">
+                <img src="static/res_photo/{{ record.first_name }}.jpg" class="card-img-top" alt="{{ record.first_name }} Photo">
+                <div class="card-body">
+                  <h5 class="card-title">{{ record.first_name }} {{ record.last_name }}</h5>
+                  <p class="card-text">
+                    <strong>Section: </strong> {{ record.section }} <br>
+                    <strong>Medical Background: </strong> {{ record.med_background }}
+                  </p>
+                  <a href="#" class="btn btn-primary">View</a>
+                </div>
+              </div>
+
+
             </div>
-          </div>
+
+            {% if forloop.counter|divisibleby:2 and not forloop.last %}
+
+              </div>
+              <div class="row">
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
       
-         <br>
+
+
+      <!-- <div class="card" style="width: 18rem;">
+        <img src="static/res_photo/{{record.first_name}}.jpg" class="card-img-top" alt="{{record.first_name}} Photo">
+        <div class="card-body">
+          <h5 class="card-title">{{ record.first_name }} {{ record.last_name }}</h5>
+
+          <p class="card-text">
+            <strong>Section: </strong> {{ record.section }} <br>
+            <strong>Medical Background: </strong> {{ record.med_background }}
+          </p>
+
+          <a href="#" class="btn btn-primary">View</a>
+        </div>
+      </div> -->
+      <br>
       {% endfor %}
 
     {% else %}
