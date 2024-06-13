@@ -34,4 +34,3 @@ class SignUpForm(UserCreationForm):
 
     
 
-# ( widget=forms.DateInput(attrs={'class':'form-control', 'type':'date'} ))
