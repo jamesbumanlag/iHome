@@ -59,7 +59,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Age',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -68,7 +68,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Gender',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -77,7 +77,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Religion',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -87,7 +87,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'House No/Street Name',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -96,7 +96,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Suburb',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -105,7 +105,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'State',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -114,7 +114,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Postcode',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -123,7 +123,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Country',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -132,7 +132,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Section',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -141,7 +141,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Medical History',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -168,7 +168,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Contact Number',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
@@ -177,7 +177,7 @@ class AddRecordForm(forms.ModelForm):
         required=True, 
         widget=forms.widgets.TextInput(
             attrs={
-                'placeholder':'Relationship',
+                'placeholder':'',
                 'class': 'form-control', 
                 'label':''
                 }
