@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+{{ customer_record.first_name}} {{ customer_record.last_name}}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="col-md-6 offset-md-3 container">
+    <br>
+    <br>
+    
+    <br>
+
+    {% if user.is_authenticated %}
+        <div class="card">
+            <div class="card-header">
+               <h4>{{ customer_record.first_name}} {{ customer_record.last_name}}</h4> 
+            </div>
+            <img src="{% static 'res_photo/' %}{{ customer_record.first_name}}.jpg" class="card-img-top" alt="{{ customer_record.first_name}} Photo">
+            <div class="card-body">
+            
+            <p class="card-text">Age : {{ customer_record.age }} <br>
+                Gender : {{ customer_record.gender }} <br>
+                Religion : {{ customer_record.religion }} <br><br>
+                <strong>Address</strong> <br>
+                House No/Street Name : {{ customer_record.house_street }} <br>
+                Suburb: {{ customer_record.suburb }} <br>
+                State: {{ customer_record.state }} <br>
+                Postcode: {{ customer_record.post_code }} <br>
+                Country: {{ customer_record.country }}
+                <br><br>
+                <strong>Medical History</strong> <br>
+                Section: {{ customer_record.section }} <br>
+                Medical Background: {{ customer_record.med_background }}
+                <br><br>
+                <Strong>Contact Person</Strong><br>
+                Name: {{ customer_record.contact_first}} {{ customer_record.contact_last}} <br>
+                Contact Number: {{ customer_record.contact_number }} <br>
+                Relationship: {{ customer_record.contact_rel}}
+
+            </p>
+            <br>
+            <a href="{% url 'residents' %}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+
+
+
+
+    {% endif %}
+</div>
+ <br><br>
+
+
+
+{% endblock %}

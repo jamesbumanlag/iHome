@@ -85,3 +85,13 @@ def residents(request):
 
 def add_res(request):
     return render(request, 'login/add_res.html')
+
+
+def cus_record(request,pk):
+    if request.user.is_authenticated:
+         # Look up record
+        customer_record = Record.objects.get(id=pk)
+        return render(request, 'login/record.html', {'customer_record': customer_record})
+    else:
+        messages.success(request, 'You need to be logged in to view record')
+        return redirect('home')

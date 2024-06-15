@@ -12,6 +12,6 @@ urlpatterns = [
     path('logout_user', views.logout_user, name='logout'),
     path('register', views.register_user, name='register'),
     path('residents', views.residents, name='residents'),
-    path('add_res', views.add_res, name='add_res')
-
+    path('add_res', views.add_res, name='add_res'),
+    path('record/<int:pk>', views.cus_record, name='record'),
 ]
