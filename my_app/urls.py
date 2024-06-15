@@ -14,4 +14,6 @@ urlpatterns = [
     path('residents', views.residents, name='residents'),
     path('add_res', views.add_res, name='add_res'),
     path('record/<int:pk>', views.cus_record, name='record'),
+     path('add_record', views.add_record, name='add_record'),
+    
 ]
