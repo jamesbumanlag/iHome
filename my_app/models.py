@@ -1,5 +1,5 @@
 from django.db import models
-from .forms import forms
+
 
 class Record(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
