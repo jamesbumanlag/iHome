@@ -111,3 +111,18 @@ def add_record(request):
     else:
         messages.success(request, 'You must be logged in')
         return render(request, 'login/residents.html')
+    
+def update_record(request,pk):
+    if request.user.is_authenticated:
+            # Look up record
+        current_record = Record.objects.get(id=pk)
+        form = AddRecordForm(request.POST or None, instance=current_record)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Record has been updated')
+            return redirect('record', pk=current_record.id)
+        return render(request, 'login/update_record.html' , {'form':form})
+    else:
+        messages.success(request, 'You Must Be logged in')
+        return redirect('home')
+
