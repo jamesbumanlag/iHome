@@ -120,7 +120,7 @@ def update_record(request,pk):
         if form.is_valid():
             form.save()
             messages.success(request, 'Record has been updated')
-            return redirect('residents')
+            return redirect('record', pk=current_record.id)
         return render(request, 'login/update_record.html' , {'form':form})
     else:
         messages.success(request, 'You Must Be logged in')
