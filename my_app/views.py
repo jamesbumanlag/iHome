@@ -96,6 +96,15 @@ def cus_record(request,pk):
         messages.success(request, 'You need to be logged in to view record')
         return redirect('home')
     
+def add_care(request,pk):
+    if request.user.is_authenticated:
+        # Look up record
+        care = Record.objects.get(id=pk)
+        return render(request, 'login/add_care.html', {'care':care})
+    else:
+        messages.success(request, 'Unauthorized Access')
+        return redirect('home')
+    
 
 
 def add_record(request):

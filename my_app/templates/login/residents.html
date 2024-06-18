@@ -28,6 +28,7 @@
                                     <strong>Medical Background: </strong> {{ record.med_background }}
                                 </p>
                                 <a href="{% url 'record' record.id %}" class="btn btn-primary">View</a>
+                                <a href="{% url 'add_care' record.id %}" class="btn btn-primary">Add Care</a>
                             </div>
                         </div>
                     </div>
