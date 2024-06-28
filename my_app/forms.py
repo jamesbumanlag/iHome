@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record
+from .models import Record, PersonalCare
+from django.forms import ModelForm
 
 
 
@@ -36,155 +37,49 @@ class SignUpForm(UserCreationForm):
 
 class AddRecordForm(forms.ModelForm):
     
-    first_name = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'First Name',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'First Name','class': 'form-control','label':'' }))
     
-    last_name = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'Last Name',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    age = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    gender = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    religion = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
+    last_name = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={'placeholder':'Last Name','class': 'form-control','label':'' }))
+    age = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={'placeholder':'','class': 'form-control', 'label':'' } ))
+    gender = forms.CharField( required=True, widget=forms.widgets.TextInput( attrs={ 'placeholder':'', 'class': 'form-control','label':''  } ))
+    religion = forms.CharField(required=True, widget=forms.widgets.TextInput( attrs={ 'placeholder':'','class': 'form-control', 'label':'' } ))
     
-    house_street = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    suburb = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    state  = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    post_code = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    country = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    section = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    med_background = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    contact_first = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'First Name',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    contact_last =forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'Last Name',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    contact_number = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
-    contact_rel = forms.CharField(
-        required=True, 
-        widget=forms.widgets.TextInput(
-            attrs={
-                'placeholder':'',
-                'class': 'form-control', 
-                'label':''
-                }
-            ))
+    house_street = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'','class': 'form-control',   'label':''  } ))
+    suburb = forms.CharField(required=True, widget=forms.widgets.TextInput(  attrs={  'placeholder':'', 'class': 'form-control',  'label':''   }  ))
+    state  = forms.CharField( required=True,widget=forms.widgets.TextInput(  attrs={'placeholder':'',  'class': 'form-control',   'label':''  }  ))
+    post_code = forms.CharField( required=True, widget=forms.widgets.TextInput( attrs={ 'placeholder':'', 'class': 'form-control', 'label':'' } ))
+    country = forms.CharField(required=True,  widget=forms.widgets.TextInput(attrs={  'placeholder':'', 'class': 'form-control','label':'' } ))
+    
+    section = forms.CharField(required=True, widget=forms.widgets.TextInput( attrs={ 'placeholder':'', 'class': 'form-control', 'label':''   }  ))
+    med_background = forms.CharField( required=True,  widget=forms.widgets.TextInput(attrs={'placeholder':'','class': 'form-control', 'label':''  }  ))
+    contact_first = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={'placeholder':'First Name', 'class': 'form-control', 'label':'' }  ))
+    contact_last =forms.CharField( required=True,widget=forms.widgets.TextInput( attrs={ 'placeholder':'Last Name','class': 'form-control','label':'' } ))
+    contact_number = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={ 'placeholder':'', 'class': 'form-control', 'label':'' } ))
+    contact_rel = forms.CharField( required=True, widget=forms.widgets.TextInput( attrs={'placeholder':'', 'class': 'form-control', 'label':''  } ))
     
 
     class Meta:
         model = Record
         exclude = ('user',)
+
+
+class DateInput(forms.DateTimeInput):
+    input_type = 'date'
+
+
+class TimeInput(forms.TimeInput):
+    input_type = 'time'
+
+class PersonalCareForms(forms.ModelForm):
+    class Meta:
+        model = PersonalCare
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    bathing = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Bath', 'class':'form-control', 'label':''}))
+    dressing = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Dressing', 'class':'form-control', 'label':''}))
+    toileting = forms.CharField(required=True, widget=forms.widgets.DateTimeInput(attrs={'placeholder':'Toileting', 'class':'form-control', 'label':''}))
+    
     
