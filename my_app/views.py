@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, PersonalCareForms
+from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms, MobilityAssistance
 from .models import Record, PersonalCare
 
 def home(request):
@@ -95,26 +95,9 @@ def cus_record(request,pk):
     else:
         messages.success(request, 'You need to be logged in to view record')
         return redirect('home')
-    
-# def add_care(request):
-#     form = PersonalCareForms(request.POST or None)
-#     if request.user.is_authenticated:
-        
-#         if request.method == 'POST':
-            
-#             if form.is_valid():
-#                 add_care = form.save()
-#                 messages.success(request, 'Saved')
-#                 return redirect('residents')
-        
-#         return render(request, 'login/add_care.html', {'form':form})
-    
 
-#     else:
-#         messages.success(request, 'Unauthorized Access')
-#         return redirect('home')
 
-def add_care(request):
+def personal_care(request):
     form = PersonalCareForms(request.POST or None)
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -122,12 +105,44 @@ def add_care(request):
                 form.save()
                 messages.success(request, 'Record Added')
                 return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/personal_care.html', {'form':form})
+
         
-        return render (request,'login/add_care.html', {'form':form})
+        return render (request,'login/personal_care.html', {'form':form})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
+
+
+def mobility(request):
+    form = MobilityAssistanceForms(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Record Added')
+                return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/personal_care.html', {'form':form})
+        
+        return render (request,'login/mobility.html', {'form':form})
     else:
         messages.success(request, 'You must be logged in')
         return redirect('home')
     
+    
+def view_care(request):
+    if request.user.is_authenticated:
+        # look up records
+        personal_care = PersonalCare.objects.all()
+        mobility_assist = MobilityAssistance.objects.all()
+        return render(request, 'login/view_care.html',{'personal_care':personal_care, 'mobility_assist':mobility_assist},)
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
     
 
 

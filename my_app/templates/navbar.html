@@ -14,9 +14,28 @@
                       <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'add_record' %}">&nbsp;Add Resident&nbsp;</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'add_care' %}">&nbsp;Add Care&nbsp;</a>
+
+
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Add Care
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="{% url 'personal_care' %}">Personal Care</a></li>
+                          <li><a class="dropdown-item" href="{% url 'mobility' %}">Mobility Assistance</a></li>
+                          <li><a class="dropdown-item" href="#">Nutrition Hydration</a></li>
+                          <li><a class="dropdown-item" href="#">Health Monitoring</a></li>
+                          <li><a class="dropdown-item" href="#">Activities</a></li>
+                          <li><a class="dropdown-item" href="#">Housekeeping</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="{% url 'residents' %}">Home</a></li>
+                        </ul>
                       </li>
+
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'view_care' %}">&nbsp;View Care&nbsp;</a>
+                      </li>
+                      
                       
                       
             

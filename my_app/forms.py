@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, PersonalCare
+from .models import Record, PersonalCare, MobilityAssistance
 from django.forms import ModelForm
 
 
@@ -82,4 +82,14 @@ class PersonalCareForms(forms.ModelForm):
     dressing = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Dressing', 'class':'form-control', 'label':''}))
     toileting = forms.CharField(required=True, widget=forms.widgets.DateTimeInput(attrs={'placeholder':'Toileting', 'class':'form-control', 'label':''}))
     
+class MobilityAssistanceForms(forms.ModelForm):
+    class Meta:
+        model = MobilityAssistance
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    transfer = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Transfer', 'class':'form-control', 'label':''}))
+    mobility = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Mobility', 'class':'form-control', 'label':''}))
     
