@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-{{ customer_record.first_name}} {{ customer_record.last_name}}
+{{ care.first_name}} {{ care.last_name}}
 {% endblock %}
 
 {% block content %}
@@ -15,9 +15,28 @@
     
     <br>
 
-    
-        <h1>Add Care</h1>
-   
+        <br>
+        <h2>Add Care</h2>
+      
+        <br>
+        <h5>Personal Care</h5>
+        <form  method=POST>
+            {% csrf_token %}
+
+
+            {{ form.person }} <br>
+            {{ form.date }} <br>
+            {{ form.time }} <br>
+            {{ form.bathing }} <br>
+            {{ form.dressing }} <br>
+            {{ form.toileting }} <br>
+
+            <br>
+            <input type="submit" value="Submit" class="btn btn-primary">
+
+
+        </form>
+   <br><br>
 
 </div>
 

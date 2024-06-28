@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm
-from .models import Record
+from .forms import SignUpForm, AddRecordForm, PersonalCareForms
+from .models import Record, PersonalCare
 
 def home(request):
     return render(request, 'home.html')
@@ -62,7 +62,7 @@ def register_user(request):
 			user = authenticate(username=username, password=password)
 			login(request, user)
 			messages.success(request, f"You Have Successfully Registered! Welcome! {username}")
-			return redirect('home')
+			return redirect('residents')
 	else:
 		form = SignUpForm()
 		return render(request, 'login/register.html', {'form':form})
@@ -96,14 +96,38 @@ def cus_record(request,pk):
         messages.success(request, 'You need to be logged in to view record')
         return redirect('home')
     
-def add_care(request,pk):
+# def add_care(request):
+#     form = PersonalCareForms(request.POST or None)
+#     if request.user.is_authenticated:
+        
+#         if request.method == 'POST':
+            
+#             if form.is_valid():
+#                 add_care = form.save()
+#                 messages.success(request, 'Saved')
+#                 return redirect('residents')
+        
+#         return render(request, 'login/add_care.html', {'form':form})
+    
+
+#     else:
+#         messages.success(request, 'Unauthorized Access')
+#         return redirect('home')
+
+def add_care(request):
+    form = PersonalCareForms(request.POST or None)
     if request.user.is_authenticated:
-        # Look up record
-        care = Record.objects.get(id=pk)
-        return render(request, 'login/add_care.html', {'care':care})
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Record Added')
+                return redirect('residents')
+        
+        return render (request,'login/add_care.html', {'form':form})
     else:
-        messages.success(request, 'Unauthorized Access')
+        messages.success(request, 'You must be logged in')
         return redirect('home')
+    
     
 
 
