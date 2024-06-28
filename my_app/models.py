@@ -40,11 +40,12 @@ class PersonalCare(models.Model):
 
 
 
-class MobilityAssistance(models.Model):
-    date_time = models.DateTimeField('Date/Time', null=True)
+class MobilityAssistance(models.Model):  
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
     person = models.ForeignKey(Record, blank=True, null=True,on_delete=models.CASCADE)
     transfer = models.CharField(max_length=100)
-    walking = models.CharField(max_length=100)
+    mobility = models.CharField(max_length=100)
 
     def __str__(self):
         return(f'{self.person.first_name} {self.person.last_name} ')
