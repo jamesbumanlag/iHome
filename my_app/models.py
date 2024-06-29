@@ -52,7 +52,8 @@ class MobilityAssistance(models.Model):
 
 
 class NutritionHydration(models.Model):
-    date_time = models.DateTimeField('Date/Time', null=True)
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
     person = models.ForeignKey(Record, blank=True, null=True ,on_delete=models.CASCADE)
     feeding_assistance = models.CharField(max_length=100)
     food_intake =models.CharField(max_length=100)
@@ -63,7 +64,8 @@ class NutritionHydration(models.Model):
 
 
 class HealthMonitoring(models.Model):
-    date_time = models.DateTimeField('Date/Time', null=True)
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
     person = models.ForeignKey(Record, blank=True, null=True, on_delete=models.CASCADE)
     bgl = models.CharField(max_length=100)
     bp = models.CharField(max_length=100)
@@ -75,7 +77,8 @@ class HealthMonitoring(models.Model):
     
 
 class Activities(models.Model):
-    date_time = models.DateTimeField('Date/Time', null=True)
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
     person = models.ForeignKey(Record, blank=True, null=True ,on_delete=models.CASCADE)
     companionship = models.CharField(max_length=100)
     daily_activities = models.CharField(max_length=100)
@@ -84,7 +87,8 @@ class Activities(models.Model):
         return(f'{self.person.first_name} {self.person.last_name} ')
 
 class Housekeeping(models.Model):
-    date_time = models.DateTimeField('Date/Time', null=True)
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
     person = models.ForeignKey(Record, blank=True, null=True, on_delete=models.CASCADE)
     bathroom = models.CharField(max_length=100)
     laundry = models.CharField(max_length=100)
