@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms
 from .models import Record,MobilityAssistance, PersonalCare,NutritionHydration, HealthMonitoring,Activities,Housekeeping
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 def home(request):
@@ -177,7 +178,7 @@ def view_care(request):
 
 
 def add_record(request):
-    form = AddRecordForm(request.POST or None)
+    form = AddRecordForm(request.POST or None, request.FILES)
     if request.user.is_authenticated:
         if request.method == 'POST':
             if form.is_valid():
@@ -190,19 +191,41 @@ def add_record(request):
         messages.success(request, 'You must be logged in')
         return render(request, 'login/residents.html')
     
-def update_record(request,pk):
+
+def update_record(request, pk):
     if request.user.is_authenticated:
-            # Look up record
-        current_record = Record.objects.get(id=pk)
-        form = AddRecordForm(request.POST or None, instance=current_record)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Record has been updated')
-            return redirect('record', pk=current_record.id)
-        return render(request, 'login/update_record.html' , {'form':form})
+        current_record = get_object_or_404(Record, id=pk)
+        
+        if request.method == 'POST':
+            form = AddRecordForm(request.POST, request.FILES, instance=current_record)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Record has been updated')
+                return redirect('record', pk=current_record.id)
+            else:
+                messages.success(request, 'Update Failed')
+                return redirect('record', pk=current_record.id)
+        else:
+            form = AddRecordForm(instance=current_record)
+
+        return render(request, 'login/update_record.html', {'form': form})
     else:
-        messages.success(request, 'You Must Be logged in')
+        messages.success(request, 'You must be logged in')
         return redirect('home')
+        
+# def update_record(request,pk):
+#     if request.user.is_authenticated:
+#             # Look up record
+#         current_record = get_object_or_404(Record, id=pk)
+#         form = AddRecordForm(request.POST or None, request.FILES or None, instance=current_record)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Record has been updated')
+#             return redirect('record', pk=current_record.id)
+#         return render(request, 'login/update_record.html' , {'form':form})
+#     else:
+#         messages.success(request, 'You Must Be logged in')
+#         return redirect('home')
 
 def delete_record(request, pk):
      if request.user.is_authenticated:

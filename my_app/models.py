@@ -19,6 +19,7 @@ class Record(models.Model):
     contact_last = models.CharField(max_length=50)
     contact_number = models.CharField(max_length=50)
     contact_rel = models.CharField(max_length=20)
+    person_image = models.ImageField(null=True, blank=True, upload_to='images/')
     
     
     def __str__(self):
