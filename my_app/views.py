@@ -182,7 +182,7 @@ def add_record(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             if form.is_valid():
-                add_record = form.save()
+                form.save()
                 messages.success(request, 'Record Added')
                 return redirect('residents')
         
@@ -197,6 +197,7 @@ def update_record(request, pk):
         current_record = get_object_or_404(Record, id=pk)
         
         if request.method == 'POST':
+           
             form = AddRecordForm(request.POST, request.FILES, instance=current_record)
             if form.is_valid():
                 form.save()
@@ -207,6 +208,7 @@ def update_record(request, pk):
                 return redirect('record', pk=current_record.id)
         else:
             form = AddRecordForm(instance=current_record)
+            
 
         return render(request, 'login/update_record.html', {'form': form})
     else:

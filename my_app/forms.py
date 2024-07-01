@@ -56,11 +56,12 @@ class AddRecordForm(forms.ModelForm):
     contact_last =forms.CharField( required=True,widget=forms.widgets.TextInput( attrs={ 'placeholder':'Last Name','class': 'form-control','label':'' } ))
     contact_number = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={ 'placeholder':'', 'class': 'form-control', 'label':'' } ))
     contact_rel = forms.CharField( required=True, widget=forms.widgets.TextInput( attrs={'placeholder':'', 'class': 'form-control', 'label':''  } ))
-    person_image = forms.ImageField()
+    person_image = forms.ImageField(required=False, )
 
     class Meta:
         model = Record
         exclude = ('user',)
+        fields = '__all__'
         
 
 
