@@ -12,7 +12,7 @@
         <h1>Update {{current_record.first_name}} {{current_record.last_name}}</h1>
         <br><br>
 
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h4>Personal Info</h4>
             <div class="input-group">
