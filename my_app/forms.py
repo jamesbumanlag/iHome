@@ -52,6 +52,8 @@ class AddRecordForm(forms.ModelForm):
     
     section = forms.CharField(required=True, widget=forms.widgets.TextInput( attrs={ 'placeholder':'', 'class': 'form-control', 'label':''   }  ))
     med_background = forms.CharField( required=True,  widget=forms.widgets.TextInput(attrs={'placeholder':'','class': 'form-control', 'label':''  }  ))
+    care_plan = forms.CharField( required=True,  widget=forms.widgets.Textarea(attrs={'placeholder':'','class': 'form-control', 'label':''  }  ))
+   
     contact_first = forms.CharField(required=True,widget=forms.widgets.TextInput(attrs={'placeholder':'First Name', 'class': 'form-control', 'label':'' }  ))
     contact_last =forms.CharField( required=True,widget=forms.widgets.TextInput( attrs={ 'placeholder':'Last Name','class': 'form-control','label':'' } ))
     contact_number = forms.CharField( required=True, widget=forms.widgets.TextInput(attrs={ 'placeholder':'', 'class': 'form-control', 'label':'' } ))

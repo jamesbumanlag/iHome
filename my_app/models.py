@@ -15,6 +15,7 @@ class Record(models.Model):
     country = models.CharField(max_length=50)
     section = models.CharField(max_length=50)
     med_background = models.CharField(max_length=250)
+    care_plan = models.CharField(max_length=2500, null=True)
     contact_first = models.CharField(max_length=50)
     contact_last = models.CharField(max_length=50)
     contact_number = models.CharField(max_length=50)

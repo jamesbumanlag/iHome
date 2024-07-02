@@ -49,14 +49,7 @@
                 {{ form.country }}
             </div>
             <br><br>
-            <h4>Medical Background</h4>
-            <div class="input-group">
-                <span class="input-group-text">Section</span>
-                {{ form.section }}
-                <span class="input-group-text">Medical History</span>
-                {{ form.med_background }}
-            </div>
-            <br><br>
+            
             <h4>Contact Person</h4>
             <div class="input-group">
                 <span class="input-group-text">Name</span>
@@ -70,12 +63,31 @@
                 {{ form.contact_rel }}
             </div>
             <br><br>
+
+            <h4>Medical Assessment</h4>
+            <div class="input-group">
+                <span class="input-group-text">Section</span>
+                {{ form.section }}
+                <span class="input-group-text">Medical Condition</span>
+                {{ form.med_background }}
+            </div>
+            <br><br>
+            
+            <h4>Care Plan</h4>
+            <div class="input-group">
+                
+                {{ form.care_plan }}
+            </div>
+            
+            <br><br>
+
             <h4>Upload Image</h4>
             <div class="input-group">
                 
                 <br>
                 {{ form.person_image }}
             </div>
+
             <br><br>
             <button type="submit" class="btn btn-primary">Update Record</button>
             <button type="button" class="btn btn-primary" onclick="history.back()">Back</button>
