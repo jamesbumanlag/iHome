@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, PersonalCare, MobilityAssistance
+from .models import Record, PersonalCare, MobilityAssistance, NutritionHydration, HealthMonitoring, Activities, Housekeeping, CareType
 from django.forms import ModelForm
 
 
@@ -96,4 +96,4 @@ class MobilityAssistanceForms(forms.ModelForm):
     person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
     transfer = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Transfer', 'class':'form-control', 'label':''}))
     mobility = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Mobility', 'class':'form-control', 'label':''}))
-    
+

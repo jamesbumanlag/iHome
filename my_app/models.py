@@ -25,13 +25,14 @@ class Record(models.Model):
     
     def __str__(self):
         return(f'{self.first_name} {self.last_name}')
-    
+
+
 
 class PersonalCare(models.Model):
     
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True,on_delete=models.CASCADE)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
     bathing = models.CharField(max_length=100)
     dressing = models.CharField(max_length=100)
     toileting = models.CharField(max_length=100)
@@ -45,7 +46,7 @@ class PersonalCare(models.Model):
 class MobilityAssistance(models.Model):  
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True,on_delete=models.CASCADE)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
     transfer = models.CharField(max_length=100)
     mobility = models.CharField(max_length=100)
 
@@ -56,7 +57,7 @@ class MobilityAssistance(models.Model):
 class NutritionHydration(models.Model):
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True ,on_delete=models.CASCADE)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
     feeding_assistance = models.CharField(max_length=100)
     food_intake =models.CharField(max_length=100)
     fluid_intake = models.CharField(max_length=100)
@@ -68,7 +69,7 @@ class NutritionHydration(models.Model):
 class HealthMonitoring(models.Model):
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True, on_delete=models.CASCADE)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
     bgl = models.CharField(max_length=100)
     bp = models.CharField(max_length=100)
     o2 = models.CharField(max_length=100)
@@ -81,7 +82,7 @@ class HealthMonitoring(models.Model):
 class Activities(models.Model):
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True ,on_delete=models.CASCADE)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
     companionship = models.CharField(max_length=100)
     daily_activities = models.CharField(max_length=100)
 
@@ -91,15 +92,30 @@ class Activities(models.Model):
 class Housekeeping(models.Model):
     date = models.DateField('Date', null=True)
     time = models.TimeField('Time', null=True)
-    person = models.ForeignKey(Record, blank=True, null=True, on_delete=models.CASCADE)
-    bathroom = models.CharField(max_length=100)
-    laundry = models.CharField(max_length=100)
-    bedroom = models.CharField(max_length=100)
-    kitchen = models.CharField(max_length=100)
-    living = models.CharField(max_length=100)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
+    bathroom = models.CharField(max_length=100,default='Bathroom', null=True)
+    laundry = models.CharField(max_length=100, default='Laundry',null=True)
+    bedroom = models.CharField(max_length=100,  default='Bedroom',null=True)
+    kitchen = models.CharField(max_length=100,  default='kitchen',null=True)
+    living = models.CharField(max_length=100,  default='Living Room',null=True)
+    
 
 
     def __str__(self):
         return(f'{self.person.first_name} {self.person.last_name} ')
 
+
+
     
+class CareType(models.Model):
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
+    bathroom = models.CharField(max_length=100,default='Bathroom',)
+    personal_care = models.ForeignKey(PersonalCare, blank=True, null=True, on_delete=models.CASCADE)
+    mobility_assistance = models.ForeignKey(MobilityAssistance, on_delete=models.CASCADE, null=True, blank=True)
+    nutrition_hydration = models.ForeignKey(NutritionHydration, on_delete=models.CASCADE, null=True, blank=True)
+    health_monitoring = models.ForeignKey(HealthMonitoring, on_delete=models.CASCADE, null=True, blank=True)
+    activities = models.ForeignKey(Activities, on_delete=models.CASCADE, null=True, blank=True)
+    housekeeping = models.ForeignKey(Housekeeping, on_delete=models.CASCADE, null=True, blank=True)
+
+
+
