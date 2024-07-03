@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ihomedb2',
+        'NAME': 'ihomedb3',
         'USER': 'root',
         'PASSWORD': '0911',
         'HOST': 'localhost',

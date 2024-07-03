@@ -20,5 +20,6 @@ urlpatterns = [
     path('personal_care', views.personal_care, name='personal_care'),
     path('mobility', views.mobility, name='mobility'),
     path('view_care', views.view_care, name='view_care'),
+   
     
 ]
