@@ -36,10 +36,7 @@ class PersonalCare(models.Model):
     bathing = models.CharField(max_length=100)
     dressing = models.CharField(max_length=100)
     toileting = models.CharField(max_length=100)
-
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name} ')
-
+    
 
 
 
@@ -49,10 +46,9 @@ class MobilityAssistance(models.Model):
     person = models.ForeignKey(Record, on_delete=models.CASCADE)
     transfer = models.CharField(max_length=100)
     mobility = models.CharField(max_length=100)
+    
 
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name} ')
-
+    
 
 class NutritionHydration(models.Model):
     date = models.DateField('Date', null=True)
@@ -62,8 +58,7 @@ class NutritionHydration(models.Model):
     food_intake =models.CharField(max_length=100)
     fluid_intake = models.CharField(max_length=100)
     
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name}')
+    
 
 
 class HealthMonitoring(models.Model):
@@ -75,9 +70,6 @@ class HealthMonitoring(models.Model):
     o2 = models.CharField(max_length=100)
     pulse = models.CharField(max_length=100)
 
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name} ')
-    
 
 class Activities(models.Model):
     date = models.DateField('Date', null=True)
@@ -86,8 +78,6 @@ class Activities(models.Model):
     companionship = models.CharField(max_length=100)
     daily_activities = models.CharField(max_length=100)
 
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name} ')
 
 class Housekeeping(models.Model):
     date = models.DateField('Date', null=True)
@@ -99,23 +89,32 @@ class Housekeeping(models.Model):
     kitchen = models.CharField(max_length=100,  default='kitchen',null=True)
     living = models.CharField(max_length=100,  default='Living Room',null=True)
     
-
-
-    def __str__(self):
-        return(f'{self.person.first_name} {self.person.last_name} ')
-
-
-
     
 class CareType(models.Model):
+
     person = models.ForeignKey(Record, on_delete=models.CASCADE)
-    bathroom = models.CharField(max_length=100,default='Bathroom',)
-    personal_care = models.ForeignKey(PersonalCare, blank=True, null=True, on_delete=models.CASCADE)
-    mobility_assistance = models.ForeignKey(MobilityAssistance, on_delete=models.CASCADE, null=True, blank=True)
-    nutrition_hydration = models.ForeignKey(NutritionHydration, on_delete=models.CASCADE, null=True, blank=True)
-    health_monitoring = models.ForeignKey(HealthMonitoring, on_delete=models.CASCADE, null=True, blank=True)
-    activities = models.ForeignKey(Activities, on_delete=models.CASCADE, null=True, blank=True)
-    housekeeping = models.ForeignKey(Housekeeping, on_delete=models.CASCADE, null=True, blank=True)
+    personal_care = models.CharField(max_length=100,default='Bathroom',)
+    mobility_assistance = models.CharField(max_length=100,default='Bathroom',)
+    nutrition_hydration = models.CharField(max_length=100,default='Bathroom',)
+    health_monitoring = models.CharField(max_length=100,default='Bathroom',)
+    activities = models.CharField(max_length=100,default='Bathroom',)
+    housekeeping = models.CharField(max_length=100,default='Bathroom',)
 
+    
 
+class ProgressNotes(models.Model):
 
+    CARE_TYPE_CHOICES = [
+        ('personal_care','Personal Care' ),
+        ('mobility_assistance','Mobility Assistance'),
+        ('nutrition_hydration','Nutrition and Hydration'),
+        ('health_monitoring','Health Monitoring'),
+        ('activities','Activities'),
+        ('housekeeping','Housekeeping'),
+
+    ]
+    date = models.DateField('Date', null=True)
+    time = models.TimeField('Time', null=True)
+    person = models.ForeignKey(Record, on_delete=models.CASCADE)
+    care_types = models.CharField(max_length=20, choices=CARE_TYPE_CHOICES)
+    progress_note = models.CharField(max_length=2500)

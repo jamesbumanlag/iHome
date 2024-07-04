@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Record, PersonalCare, MobilityAssistance, NutritionHydration, HealthMonitoring, Activities, Housekeeping, CareType
+from .models import Record, PersonalCare, MobilityAssistance, NutritionHydration, HealthMonitoring, Activities, Housekeeping, CareType, ProgressNotes
 from django.forms import ModelForm
 
 
@@ -97,3 +97,29 @@ class MobilityAssistanceForms(forms.ModelForm):
     transfer = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Transfer', 'class':'form-control', 'label':''}))
     mobility = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Mobility', 'class':'form-control', 'label':''}))
 
+
+
+CARE_TYPE_CHOICES = [
+    ('select', 'Select'),
+    ('personal_care', 'Personal Care'),
+    ('mobility_assistance', 'Mobility Assistance'),
+    ('nutrition_hydration', 'Nutrition and Hydration'),
+    ('health_monitoring', 'Health Monitoring'),
+    ('activities', 'Activities'),
+    ('housekeeping', 'Housekeeping'),
+]
+
+
+
+class ProgressNotesForm(forms.ModelForm):
+    class Meta:
+        model = ProgressNotes
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    care_types = forms.ChoiceField( choices=CARE_TYPE_CHOICES,widget=forms.Select(attrs={'class':'form-control'}))
+    progress_note = forms.CharField(required=True, widget=forms.widgets.Textarea(attrs={'placeholder':'Write Progress Notes Here', 'class':'form-control', 'label':''}))
+   
+    
