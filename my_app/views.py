@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms
-from .models import Record,MobilityAssistance, PersonalCare,NutritionHydration, HealthMonitoring,Activities,Housekeeping
+from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms, ProgressNotesForm
+from .models import Record,MobilityAssistance, PersonalCare,NutritionHydration, HealthMonitoring,Activities,Housekeeping,ProgressNotes
 from django.shortcuts import render, get_object_or_404, redirect
 
 
@@ -163,13 +163,15 @@ def view_care(request):
         healths = HealthMonitoring.objects.all()
         activities = Activities.objects.all()
         houses = Housekeeping.objects.all()
+        progress = ProgressNotes.objects.all()
         return render(request, 'login/view_care.html',{
             'personal_care':personal_care, 
             'mobility_assist':mobility_assist, 
             'nutritions':nutritions,
             'healths': healths,
             'activities': activities,
-            'houses':houses
+            'houses':houses,
+            'progress': progress,
             },)
     else:
         messages.success(request, 'You must be logged in')
@@ -228,3 +230,22 @@ def delete_record(request, pk):
         return redirect('residents')
      
 
+def progress_notes(request):
+    form = ProgressNotesForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Saved')
+                return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/progress_notes.html', {'form':form})
+
+        
+        return render (request,'login/progress_notes.html', {'form':form})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
+
+    
