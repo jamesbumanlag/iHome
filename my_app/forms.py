@@ -99,6 +99,63 @@ class MobilityAssistanceForms(forms.ModelForm):
 
 
 
+class NutritionHydrationForms(forms.ModelForm):
+    class Meta:
+        model = NutritionHydration
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    food = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Food', 'class':'form-control', 'label':''}))
+    feeding_assistance = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Assistance', 'class':'form-control', 'label':''}))
+    fluid = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Fluid', 'class':'form-control', 'label':''}))
+
+
+
+class HealthMonitoringForm(forms.ModelForm):
+    class Meta:
+        model = HealthMonitoring
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    bgl = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'bgL', 'class':'form-control', 'label':''}))
+    bp = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Bp', 'class':'form-control', 'label':''}))
+    o2 = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'o2', 'class':'form-control', 'label':''}))
+    pulse = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Pulse', 'class':'form-control', 'label':''}))
+
+
+class ActivitiesForm(forms.ModelForm):
+    class Meta:
+        model = Activities
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    companion = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Companionship', 'class':'form-control', 'label':''}))
+    daily = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Daily Activities', 'class':'form-control', 'label':''}))
+
+
+
+class HousekeepingForm(forms.ModelForm):
+    class Meta:
+        model = Housekeeping
+        fields = '__all__'
+
+    date = forms.DateField(widget=DateInput(attrs={'placeholder':'Date', 'class':'form-control', 'label':'Date'}))
+    time = forms.TimeField(widget=TimeInput(attrs={'placeholder':'Time', 'class':'form-control', 'label':'Time'}))
+    person = forms.ModelChoiceField(queryset=Record.objects.all(),widget=forms.Select(attrs={'class':'form-control'}), empty_label="Select Person")
+    bathroom = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Bathroom', 'class':'form-control', 'label':''}))
+    laundry = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Laundry', 'class':'form-control', 'label':''}))
+    bedroom = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Bedroom', 'class':'form-control', 'label':''}))
+    kitchen = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Kitchen', 'class':'form-control', 'label':''}))
+    living = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={'placeholder':'Living Room', 'class':'form-control', 'label':''}))
+
+
+
 CARE_TYPE_CHOICES = [
     ('select', 'Select'),
     ('personal_care', 'Personal Care'),

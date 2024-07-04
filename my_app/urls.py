@@ -21,5 +21,9 @@ urlpatterns = [
     path('mobility', views.mobility, name='mobility'),
     path('view_care', views.view_care, name='view_care'),
     path('progress_notes', views.progress_notes, name='progress_notes'),
+    path('nutrition', views.nutrition, name='nutrition'),
+    path('health', views.health, name='health'),
+    path('activities', views.activities, name='activities'),
+    path('house', views.house, name='house'),
     
 ]

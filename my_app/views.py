@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms, ProgressNotesForm
+from .forms import SignUpForm, AddRecordForm, PersonalCareForms, MobilityAssistanceForms, ProgressNotesForm, NutritionHydrationForms, HealthMonitoringForm,ActivitiesForm, HousekeepingForm
 from .models import Record,MobilityAssistance, PersonalCare,NutritionHydration, HealthMonitoring,Activities,Housekeeping,ProgressNotes
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -137,7 +137,7 @@ def mobility(request):
     
 
 def nutrition(request):
-    form = MobilityAssistanceForms(request.POST or None)
+    form = NutritionHydrationForms(request.POST or None)
     if request.user.is_authenticated:
         if request.method == 'POST':
             if form.is_valid():
@@ -146,14 +146,66 @@ def nutrition(request):
                 return redirect('residents')
             else:
                 messages.success(request, 'Invalid Form')
-                return render (request,'login/personal_care.html', {'form':form})
+                return render (request,'login/nutrition.html', {'form':form})
         
-        return render (request,'login/mobility.html', {'form':form})
+        return render (request,'login/nutrition.html', {'form':form})
     else:
         messages.success(request, 'You must be logged in')
         return redirect('home')
     
+
+def health(request):
+    form = HealthMonitoringForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Saved')
+                return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/health.html', {'form':form})
+        
+        return render (request,'login/health.html', {'form':form})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
     
+
+def activities(request):
+    form = ActivitiesForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Saved')
+                return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/activities.html', {'form':form})
+        
+        return render (request,'login/activities.html', {'form':form})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
+    
+def house(request):
+    form = HousekeepingForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Saved')
+                return redirect('residents')
+            else:
+                messages.success(request, 'Invalid Form')
+                return render (request,'login/house.html', {'form':form})
+        
+        return render (request,'login/house.html', {'form':form})
+    else:
+        messages.success(request, 'You must be logged in')
+        return redirect('home')
+
 def view_care(request):
     if request.user.is_authenticated:
         # look up records
