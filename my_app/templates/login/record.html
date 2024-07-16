@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
-
 {% load static %}
+
+
 
 {% block title %}
 {{ customer_record.first_name}} {{ customer_record.last_name}}
@@ -56,8 +57,8 @@
                 {{ customer_record.care_plan}}
             </p>
             <br>
-            <a href="{% url 'residents' %}" class="btn btn-primary">Back</a> &nbsp;
-            <a href="{% url 'update' customer_record.id %}" class="btn btn-primary">Update</a> &nbsp;
+            <a href="{% url 'residents' %}" class="btn btn-dark">Back</a> &nbsp;
+            <a href="{% url 'update' customer_record.id %}" class="btn btn-dark">Update</a> &nbsp;
             
             
             </div>
